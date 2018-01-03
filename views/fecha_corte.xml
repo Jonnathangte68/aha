@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.actions.act_window" id="action_fecha_corte">
+      <field name="name">Asignar feha de corte</field>
+      <field name="res_model">area</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_fecha_corte">
+      <field name="name">Asignar fecha corte</field>
+      <field name="model">area</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+          <field name="name"/>
+          <field name="fecha_corte"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</odoo>

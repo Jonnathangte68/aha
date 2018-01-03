@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.actions.act_window" id="action_llenar_hoja">
+      <field name="name">form hoja</field>
+      <field name="res_model">ha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record model="ir.ui.view" id="formulario_ha">
+      <field name="name">Agregar Actividades</field>
+      <field name="model">ha</field>
+      <field name="arch" type="xml">
+        <form string="Agregar Actividades">
+        	<header>
+        		<button string="Imprimir Hoja" type="object" name="print_ha" class="oe_highlight"/>
+        	</header>
+            <group>
+            	<group col="2">
+            		<group>
+            			<field name="name"/>
+            			<field name="mes"/>           			
+            		</group>
+            		<group>
+            			<field name="inicio_semana"/>
+		          		<field name="fin_semana"/> 
+            		</group>
+            	</group>
+                <field name="seccion_ids"/>
+            </group>
+        </form>
+      </field>
+    </record>    
+
+  </data>
+</odoo>

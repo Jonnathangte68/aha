@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <menuitem name="Ha-s" id="aplicacion_ha.menu_root"/>
+    <menuitem name="Opciones" id="aplicacion_ha.menu_1" parent="aplicacion_ha.menu_root"/>
+    <menuitem name="Evaluacion" id="aplicacion_ha.menu_2" parent="aplicacion_ha.menu_root"/>
+    <menuitem name="Configuracion" id="aplicacion_ha.menu_3" parent="aplicacion_ha.menu_root"/>
+    <menuitem name="Llenar Hoja" id="aplicacion_ha.menu_1_comments" parent="aplicacion_ha.menu_1"
+              action="action_llenar_hoja"/>
+    <menuitem name="Agregar Comentarios" id="aplicacion_ha.menu_1_printing" parent="aplicacion_ha.menu_1"
+              action="action_agregar_comentarios"/>
+    <menuitem name="Ver Personal a cargo" id="aplicacion_ha.menu_2_eval_jefe" parent="aplicacion_ha.menu_2" action="action_personal_cargo"/>
+    <menuitem name="Ver Personal" id="aplicacion_ha.menu_2_eval_procesos" parent="aplicacion_ha.menu_2" action="action_ver_personal"/>
+    <menuitem name="Asignar Fecha Corte" id="aplicacion_ha.menu_3_fecha_corte" parent="aplicacion_ha.menu_3" action="action_fecha_corte"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+Ejemplo con grupos de usuario:
+
+<menuitem id="menu_detail_access_admin_rights" action="access_rights_admin_action" parent="access_rights_menu" 
+  groups="aplicacion_ha.group_manager"/>
+<menuitem id="menu_detail_access_user_rights" action="access_rights_user_action" parent="access_rights_menu" 
+  groups="aplicacion_ha.group_user"/>
+-->
+
+  </data>
+</odoo>
