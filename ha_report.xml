@@ -1,0 +1,9 @@
+<report 
+    id="custom_report_ha"
+    model="ha.model_ha"
+    string="Invoice without prices"
+    report_type="qweb-pdf"
+    name="ha.report_ha"
+    attachment_use="False"
+    file="ha.report_ha"
+/>
