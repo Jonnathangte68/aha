@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+      <record model="ir.ui.view" id="aha.lista_uno">
+        <field name="name">lista.uno</field>
+        <field name="model">aha.ha</field>
+        <field name="arch" type="xml">
+          <tree create="0" delete="0" edit="0">
+              <field name="semana"/>
+              <field name="inicio_semana"/>
+              <field name="fin_semana"/>
+              <field name="usuario_id">
+                <tree string="Usuario" create="0" delete="0" edit="0">
+                    <field name="name"/>
+                </tree>
+              </field>
+              <button name="evaluar_ha_jefe" string="Eval" type="object"/>
+          </tree>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="aha.action_uno_lsdfklusndlknsdk">
+        <field name="name">Listado de Hojas de Actividad</field>
+        <field name="res_model">aha.ha</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="aha.lista_uno"/>
+        <field name="domain">[
+        ('hausuario_id', '=', uid),
+        ('evaljefe_id', '=', False)
+        ]</field>
+      </record>
+<!--
+     <record id="aha.action_uno_lTwo" model="ir.actions.server">
+        <field name="name">ListadoActividades</field>
+        <field name="model_id" ref="model_aha_ha"/>
+        <field name="state">code</field>
+         <field name="code">
+env['aha.ha'].test_act()
+         </field>
+    </record>
+-->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--
+    <record id="aha.verahasubordinados_dos" model="ir.rule">
+        <field name="name">ver.ha_subordinados_dos</field>
+        <field name="model_id" ref="model_aha_ha" />
+        <field name="groups" eval="[(4, ref('group_procs'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_unlink" eval="0" />
+    </record>
+-->
+
+    <record model="ir.ui.view" id="lista_dos">
+      <field name="name">lista.dos</field>
+      <field name="model">aha.ha</field>
+      <field name="arch" type="xml">
+        <tree create="0" delete="0" edit="0">
+            <field name="name"/>
+            <field name="inicio_semana"/>
+            <field name="fin_semana"/>
+            <field name="usuario_id">
+              <tree string="Usuario" create="1" delete="1" edit="1">
+                  <field name="name"/>
+              </tree>
+            </field>
+            <button name="evaluar_ha_procesos" string="Evaluar Hoja de Actividad" type="object"/>
+            <!--<button name="evaluar_ha_jefe" string="Evaluar Hoja de Actividad" type="object"/>-->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="combinado_evaluacion_search_dos">
+      <field name="name">Evaluacion</field>
+      <field name="model">aha.ha</field>
+      <field name="arch" type="xml">
+          <search string="Buscar HA">
+              <field name="name" filter_domain="[('name','ilike',self)]"/>
+              <field name="usuario_id" filter_domain="[('usuario_id.name','ilike',self)]"/>
+          </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_dos">
+      <field name="name">Listado de Hojas de Actividad</field>
+      <field name="model_id" ref="model_aha_ha"/>
+      <field name="res_model">aha.ha</field>
+      <field name="state">code</field>
+      <field name="code">
+action = {
+    'name': 'Listado de Hojas de Actividad',
+    'type': 'ir.actions.act_window',
+    'view_mode': 'tree',
+    'view_id': env.ref('lista_dos').id,
+    'view_type': 'form',
+    'target': 'self',
+    'context':'{"form_view_ref" : "aha.lista_dos"}',
+}
+      </field>
+    </record>
+
+    </data>
+</odoo>

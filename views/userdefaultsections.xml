@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="aha.formulario_def_users_jefes_serccs">
+      <field name="name">Listado de jefes</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <form string="Agregar Secciones que debe de realizar el usuario">
+          <tree>
+            <field name='name'/>
+          </tree>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="formulario_def_users_serccs">
+      <field name="name">Registrar usuario y sus actividades</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <form string="Agregar Secciones que debe de realizar el usuario">
+            <sheet>
+              <group>
+                <field name="name"/>
+                <field name="login"/>
+                <field name="password"/>
+                <field name="area_id"/>
+                <field name="jefe_id" context="{'form_view_ref':'aha.formulario_def_users_jefes_serccs'}"/>
+                <field name="resuser_id"/>
+                <field name="jefe_uid" invisible="1"/>
+                <field name="rol_id" context="{'form_view_ref' : 'aha.formulario_def_roles_cdsdfsd'}"/>
+              </group>
+            </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="formulario_def_roles_cdsdfsd">
+      <field name="name">Nuevo Rol</field>
+      <field name="model">aha.rol</field>
+      <field name="arch" type="xml">
+        <form string="Nueva Rol">
+          <group>
+            <field name="name"/>
+          </group>
+          <group>
+            <field name="tipoha_id" context="{'form_view_ref' : 'aha.formulario_def_sections_fsdfasdc'}"/>
+          </group>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.ui.view" id="formulario_def_sections_fsdfasdc">
+      <field name="name">Nueva Seccion</field>
+      <field name="model">aha.tipoha</field>
+      <field name="arch" type="xml">
+        <form string="Nueva Seccion">
+          <group>
+            <field name="name"/>
+          </group>
+          <group>
+            <field name="section_ids" context="{'form_view_ref' : 'aha.formulario_registro_seccion_fsdfasdc'}"/>
+          </group>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.ui.view" id="formulario_registro_seccion_fsdfasdc">
+      <field name="name">Registrar Seccion</field>
+      <field name="model">aha.section</field>
+      <field name="arch" type="xml">
+        <form string="Registrar Seccion">
+            <field name="name"/>
+            <field name="activity_ids" context="{'form_view_ref' : 'aha.formulario_def_users_serccs_activsd'}"/>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.ui.view" id="formulario_def_users_serccs_activsd">
+      <field name="name">Nueva actividad</field>
+      <field name="model">aha.activity</field>
+      <field name="arch" type="xml">
+        <form string="Nueva actividad">
+            <group col="2">
+              <group>
+                <field name="lun"/>
+                <field name="mar"/>
+                <field name="miercol"/> 
+                <field name="juev"/> 
+                <field name="viern"/>
+                <field name="sabad"/>               
+              </group>
+              <group>
+                <field name="name"/> 
+                <field name="um"/> 
+                <field name="frecuencia"/>
+                <field name="auxfrecuencia" attrs="{'invisible': [('|'),('frecuencia', '=', 'evento'),'|',('frecuencia', '=', 'usm'),'|',('frecuencia', '=', 'ssm'),'|',('frecuencia', '=', 'tsm'),'|',('frecuencia', '=', 'csm')]}"/>
+                <field name="typo" defaults="0"/>
+                <field name="secuencia" defaults="0"/>
+              </group>
+            </group>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.actions.act_window" id="aha.action_bb_nanana">
+      <field name="name">Registrar usuario y sus actividades</field>
+      <field name="res_model">aha.usuario</field>
+      <field name="view_id" ref="aha.formulario_def_users_serccs" />
+    </record>
+
+  </data>
+</odoo>

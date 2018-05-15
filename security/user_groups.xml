@@ -1,6 +1,44 @@
-<record id="group_user" model="res.groups">
-  <field name="name">User</field>
-  <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-  <field name="users" eval="[(4, ref('base.user_root'))]"/>
-  <field name="category_id" ref="aplicacion_ha.module_management"/>
-</record>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.module.category" id="module_management">
+      <field name="name">Demo module access</field>
+      <field name="description">User access level for this module</field>
+      <field name="sequence">3</field>
+    </record>
+
+   <record id="group_user" model="res.groups">
+     <field name="name">User</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="aha.module_management"/>
+    </record>
+
+    <record id="group_procs" model="res.groups">
+     <field name="name">Procesos</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="aha.module_management"/>
+    </record>
+
+    <record id="group_colaborator" model="res.groups">
+     <field name="name">Colaborador</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="aha.module_management"/>
+    </record>
+
+    <record id="group_jefe" model="res.groups">
+     <field name="name">Jefe</field>
+     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+     <field name="users" eval="[(4, ref('base.user_root'))]"/>
+     <field name="category_id" ref="aha.module_management"/>
+    </record>
+
+    <record id="group_manager" model="res.groups">
+      <field name="name">Manag7er</field>
+      <field name="implied_ids" eval="[(4, ref('aha.group_user'))]"/>
+      <field name="category_id" ref="aha.module_management"/>
+    </record>
+  </data>
+</odoo>

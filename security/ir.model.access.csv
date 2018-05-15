@@ -1,2 +1,34 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-demo_user, Model user access,aplicacion_ha.model_ha,aplicacion_ha.group_user,1,0,0,0
+access_ha_p, Model admin access,aha.model_aha_ha,aha.group_procs,1,1,1,1
+access_activity_p, Model admin access,aha.model_aha_activity,aha.group_procs,1,1,1,1
+access_area_p, Model admin access,aha.model_aha_area,aha.group_procs,1,1,1,1
+access_auxiliaractividadescambiantes_p, Model admin access,aha.model_aha_auxiliaractividadescambiantes,aha.group_procs,1,1,1,1
+access_evaljefe_p, Model admin access,aha.model_aha_evaljefe,aha.group_procs,1,1,1,1
+access_evalprocess_p, Model admin access,aha.model_aha_evalprocess,aha.group_procs,1,1,1,1
+access_rol_p, Model admin access,aha.model_aha_rol,aha.group_procs,1,1,1,1
+access_section_p, Model admin access,aha.model_aha_section,aha.group_procs,1,1,1,1
+access_tipoha_p, Model admin access,aha.model_aha_tipoha,aha.group_procs,1,1,1,1
+access_usuario_p, Model admin access,aha.model_aha_usuario,aha.group_procs,1,1,1,1
+access_aha_actividadesagregadasporelusuario_p,Model admin access,aha.model_aha_actividadesagregadasporelusuario,aha.group_procs,1,1,1,1
+access_ha_u, Model user access,aha.model_aha_ha,aha.group_jefe,1,1,1,1
+access_activity_u, Model user access,aha.model_aha_activity,aha.group_jefe,1,1,1,1
+access_area_u, Model user access,aha.model_aha_area,aha.group_jefe,1,1,1,1
+access_auxiliaractividadescambiantes_u, Model user access,aha.model_aha_auxiliaractividadescambiantes,aha.group_jefe,1,1,1,1
+access_evaljefe_u, Model user access,aha.model_aha_evaljefe,aha.group_jefe,1,1,1,1
+access_evalprocess_u, Model user access,aha.model_aha_evalprocess,aha.group_jefe,0,1,0,0
+access_rol_u, Model user access,aha.model_aha_rol,aha.group_jefe,1,1,1,1
+access_section_u, Model user access,aha.model_aha_section,aha.group_jefe,1,1,1,1
+access_tipoha_u, Model user access,aha.model_aha_tipoha,aha.group_jefe,1,1,1,1
+access_usuario_u, Model user access,aha.model_aha_usuario,aha.group_jefe,1,1,1,1
+access_aha_actividadesagregadasporelusuario_u,Model user access,aha.model_aha_actividadesagregadasporelusuario,aha.group_jefe,1,1,1,1
+access_ha_c, Model user access,aha.model_aha_ha,aha.group_colaborator,1,1,1,0
+access_activity_c, Model user access,aha.model_aha_activity,aha.group_colaborator,1,1,1,0
+access_area_c, Model user access,aha.model_aha_area,aha.group_colaborator,1,0,0,0
+access_auxiliaractividadescambiantes_c, Model user access,aha.model_aha_auxiliaractividadescambiantes,aha.group_colaborator,1,1,1,1
+access_evaljefe_c, Model user access,aha.model_aha_evaljefe,aha.group_colaborator,0,0,0,0
+access_evalprocess_c, Model user access,aha.model_aha_evalprocess,aha.group_colaborator,0,0,0,0
+access_rol_c, Model user access,aha.model_aha_rol,aha.group_colaborator,1,0,0,0
+access_section_c, Model user access,aha.model_aha_section,aha.group_colaborator,1,1,0,0
+access_tipoha_c, Model user access,aha.model_aha_tipoha,aha.group_colaborator,1,1,1,1
+access_usuario_c, Model user access,aha.model_aha_usuario,aha.group_colaborator,1,1,1,1
+access_aha_actividadesagregadasporelusuario_c,Model user access,aha.model_aha_actividadesagregadasporelusuario,aha.group_colaborator,1,1,1,1

@@ -4,15 +4,20 @@ from odoo import models, fields, api
 
 #Rol o Grupo Ver como enlazar con odoo groups
 class rol(models.Model):
-	_name = 'rol'
+    _name = 'aha.rol'
 
-	name = fields.Char(
-	    string='Nombre del Rol',
-	    required=True,
-	)
+    name = fields.Char(
+        string='Nombre del Rol',
+        required=True,
+    )
 
-	#usuario_ids = fields.One2many(
-	#    string='Usuario',
-	#    comodel_name='usuario',
-	#    inverse_name='rol_id',
-	#)
+    tipoha_id = fields.One2many(
+        comodel_name='aha.tipoha',
+        inverse_name='rol_id'
+    )
+
+    usuario_ids = fields.One2many(
+        string='Usuario Ids',
+        comodel_name='aha.usuario',
+        inverse_name='rol_id',
+    )

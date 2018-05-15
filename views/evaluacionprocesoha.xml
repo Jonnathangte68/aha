@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="aha.formulario_evaluacion_proccess_ha">
+      <field name="name">Agregar Actividades</field>
+      <field name="model">aha.evalprocess</field>
+      <field name="arch" type="xml">
+         <form string="Evaluar Hoja de Actividad">
+            <sheet>
+                <div class="oe_title">
+                </div>
+                <notebook>
+                  <page string="Cuestionario de Calificacion HA">
+                    <group style="border-bottom:solid 2px #32CD32;" col="2">
+                      <group><field style="width:200px;" name="criterio1check"/></group>
+                      <group><field name="criterio1commentario"/></group>
+                    </group>
+                    <group style="border-bottom:solid 2px #32CD32;" col="2">
+                      <group><field style="width:200px;" name="criterio2check"/></group>
+                      <group><field name="criterio2commentario"/></group>
+                    </group>
+                    <group style="border-bottom:solid 2px #32CD32;" col="2">
+                      <group><field style="width:200px;" name="criterio3check"/></group>
+                      <group><field name="criterio3commentario"/></group>
+                    </group>
+                    <group style="border-bottom:solid 2px #32CD32;" col="2">
+                      <group><field style="width:200px;" name="criterio4check"/></group>
+                      <group><field name="criterio4commentario"/></group>
+                    </group>
+                    <group style="border-bottom:solid 2px #32CD32;" col="2">
+                      <group><field style="width:200px;" name="criterio5check"/></group>
+                      <group><field name="criterio5commentario"/></group>
+                    </group>
+                    <field name="calificacion_general"/>
+                    <field name="ha_id" invisible="1"/>
+                  </page>
+                </notebook>
+            </sheet>
+        </form>
+      </field>
+    </record> 
+
+  </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+	<record model="ir.ui.view" id="formulario_detll_proprocc">
+      <field name="name">Detalle de calificaciones del Empleado</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <form string="Agregar Actividades">
+   		    <sheet>
+	            <group col="2">
+	        		<group>
+	        			<field name="name"/>
+	        		</group>
+	        		<group>
+	        			<field name="calificacion_p"/>
+	        		</group>
+	            </group>
+   		    </sheet>
+        </form>
+      </field>
+    </record>
+    
+  </data>
+</odoo>

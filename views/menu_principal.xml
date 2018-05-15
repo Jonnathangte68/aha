@@ -2,37 +2,81 @@
 <odoo>
   <data>
 
-    <menuitem name="Ha-s" id="aplicacion_ha.menu_root"/>
-    <menuitem name="Opciones" id="aplicacion_ha.menu_1" parent="aplicacion_ha.menu_root"/>
-    <menuitem name="Evaluacion" id="aplicacion_ha.menu_2" parent="aplicacion_ha.menu_root"/>
-    <menuitem name="Configuracion" id="aplicacion_ha.menu_3" parent="aplicacion_ha.menu_root"/>
-    <menuitem name="Llenar Hoja" id="aplicacion_ha.menu_1_comments" parent="aplicacion_ha.menu_1"
-              action="action_llenar_hoja"/>
-    <menuitem name="Agregar Comentarios" id="aplicacion_ha.menu_1_printing" parent="aplicacion_ha.menu_1"
-              action="action_agregar_comentarios"/>
-    <menuitem name="Ver Personal a cargo" id="aplicacion_ha.menu_2_eval_jefe" parent="aplicacion_ha.menu_2" action="action_personal_cargo"/>
-    <menuitem name="Ver Personal" id="aplicacion_ha.menu_2_eval_procesos" parent="aplicacion_ha.menu_2" action="action_ver_personal"/>
-    <menuitem name="Asignar Fecha Corte" id="aplicacion_ha.menu_3_fecha_corte" parent="aplicacion_ha.menu_3" action="action_fecha_corte"/>
 
 
+    <menuitem name="Ha-s" id="aha.menu_root"/>
+
+   
+    <!-- Opciones para el Rol de Jefe -->
+
+   
+
+    <menuitem name="Opciones" id="aha.menu_1" parent="aha.menu_root" groups="aha.group_jefe"/>
+    <menuitem name="Configuracion" id="aha.menu_4" parent="aha.menu_root" groups="aha.group_jefe"/>
+    <menuitem name="Emitir HA" id="aha.menu_1_comments" parent="aha.menu_1"
+              action="action_llenar_hoja" groups="aha.group_jefe"/>
+
+    <menuitem name="Ver actividades cambiadas" id="aha.cambiadas_activs_changed" parent="aha.menu_4" action="aha.action_actividades_cambiantes_ver_ww" groups="aha.group_jefe"/>
+
+    <menuitem name="Lista HA" id="aha.opcionuno" parent="aha.menu_root" action="aha.action_uno_lsdfklusndlknsdk" groups="aha.group_jefe"/>
+    <!--<menuitem name="Detalle Personal" id="aha.menu_5" parent="aha.menu_root" groups="aha.group_jefe"/>-->
+    <!--<menuitem name="Ver personal a cargo" id="aha.detalleuno" parent="aha.menu_root" action="aha.action_tres" groups="aha.group_jefe"/>-->
+    <menuitem name="Calificaciones de Colaboradores" id="aha.det_personallargpopo" parent="aha.menu_root" action="aha.action_personallargpopo" groups="aha.group_jefe"/>
+
+ 
 
 
+    <!-- Opciones para el Rol de Proceso -->
+
+  
+
+    <!--<menuitem name="Opciones" id="aha.menu_1_p" parent="aha.menu_root" groups="aha.group_procs"/>-->
+    <menuitem name="Configuracion" id="aha.menu_4_p" parent="aha.menu_root" groups="aha.group_procs"/>
+    <!--<menuitem name="Emitir HA" id="aha.menu_1_comments_p" parent="aha.menu_1_p"
+              action="action_llenar_hoja" groups="aha.group_procs"/>-->
+    <menuitem name="Agregar Nuevo Usuario" id="aha.menu_new_user_ha_system_p" parent="aha.menu_4_p"
+              action="aha.action_bb_nanana" groups="aha.group_procs"/>
+    <menuitem name="Asignar Fecha Corte" id="aha.menu_3_fecha_corte_p" parent="aha.menu_4_p" action="action_fecha_corte" groups="aha.group_procs"/>
+    <menuitem name="Lista de HA-s" id="aha.menu_3_evaluat_porscsdcsdc" parent="aha.menu_4_p" action="aha.action_other_fdslufilusdnckywnilwnbcdn" groups="aha.group_procs"/>
+    <menuitem name="Calificaciones de Colaboradores" id="aha.menu_3_uiouidfjshfwy" parent="aha.menu_root" action="aha.action_personalluyfiudshsdbchs" groups="aha.group_procs"/>
 
 
-
-
-
-
-
-
-<!-- 
-Ejemplo con grupos de usuario:
-
-<menuitem id="menu_detail_access_admin_rights" action="access_rights_admin_action" parent="access_rights_menu" 
-  groups="aplicacion_ha.group_manager"/>
-<menuitem id="menu_detail_access_user_rights" action="access_rights_user_action" parent="access_rights_menu" 
-  groups="aplicacion_ha.group_user"/>
+<!--
+    <menuitem name="Calificaciones" id="aha.menu_342_evaluat_porscsdcsdc" parent="aha.menu_4_p" action="aha.action_tres_kdkufkusdkncnsdkcnks" groups="aha.group_procs"/>
 -->
+
+
+
+    
+
+    <!--<menuitem name="Listado de Hojas de Actividad" id="aha.opciondos_p" parent="aha.menu_root" action="action_dos" groups="aha.group_procs"/>
+    <menuitem name="Lista HA" id="aha.opcionuno" parent="aha.menu_root" action="action_dos" groups="aha.group_procs"/>
+    -->
+    <!--
+    <menuitem name="Detalle Personal" id="aha.menu_5_p" parent="aha.menu_root" groups="aha.group_procs"/>
+    <menuitem name="Ver personal de la empresa" id="aha.detalledos_p" parent="aha.menu_5_p" action="action_cuatro" groups="aha.group_procs"/>
+    -->
+    <!--<menuitem name="Usuarios" id="aha.configuno_p" parent="aha.menu_4_p" action="action_seis" groups="aha.group_procs"/>-->
+
+ 
+
+    <!-- Opcion para el Colaborator -->
+
+ 
+
+    <menuitem name="Opciones" id="aha.menu_1_co" parent="aha.menu_root" groups="aha.group_colaborator"/>
+    <menuitem name="Emitir HA" id="aha.menu_1_comments_co" parent="aha.menu_1_co"
+              action="action_llenar_hoja" groups="aha.group_colaborator"/>
+    <menuitem name="Actividades Propias" id="aha.menu_1_actividadesagregadasxusuario_j" parent="aha.menu_1"
+              action="action_actividades_agregadas_por_el_usuario" groups="aha.group_jefe"/>
+    <!--<menuitem name="Actividades Propias" id="aha.menu_1_actividadesagregadasxusuario_p" parent="aha.menu_1_p"
+              action="action_actividades_agregadas_por_el_usuario" groups="aha.group_procs"/>-->
+    <menuitem name="Actividades Propias" id="aha.menu_1_actividadesagregadasxusuario_co" parent="aha.menu_1_co"
+              action="action_actividades_agregadas_por_el_usuario" groups="aha.group_colaborator"/>
+
+  
+
+    <!-- Fin de las Opciones -->
 
   </data>
 </odoo>

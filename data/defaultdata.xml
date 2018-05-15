@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="object0" model="aha.area">
+            <field name="name">Promocion</field>
+        </record>
+
+        <record id="object1" model="aha.area">
+            <field name="name">Credito</field>
+        </record>
+
+        <record id="object2" model="aha.area">
+            <field name="name">Operaciones</field>
+        </record>
+
+        <record id="object3" model="aha.area">
+            <field name="name">Comercial</field>
+        </record>
+
+        <record id="object4" model="aha.area">
+            <field name="name">Administracion</field>
+        </record>
+
+        <record id="object5" model="aha.area">
+            <field name="name">Desarrollo Organizacional</field>
+        </record>
+
+        <record id="object6" model="aha.area">
+            <field name="name">Direccion General</field>
+        </record>
+<!--
+1
+Operaciones
+2
+Promocion
+3
+Seguridad
+4
+Comercial
+5
+Administracion
+6
+Credito
+7
+Desarrollo Organizacional
+8
+Servicios Generales
+9
+Fondo
+10
+Inmobiliaria
+11
+Patrimonial
+-->
+        
+    </data>
+</odoo>

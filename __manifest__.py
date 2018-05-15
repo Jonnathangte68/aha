@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "aplicacion_ha",
+    'name': "HA",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -24,20 +24,35 @@
 
     # always loaded
     'data': [
-        #'security/ir.model.access.csv',
-        'views/report_ha.xml',
-        'views/views.xml',
-        'views/hapdf.xml',
-        'views/commentarios.xml',
+        'security/user_groups.xml',
+        'security/ir.model.access.csv',
+        #'views/views.xml',
+        'views/list_usuario_calificaciones.xml',
+        'views/list_usuario_calificacionesp.xml',
         'views/ha.xml',
-        'views/evaljefe.xml',
-        'views/evalproceso.xml',
+        'views/detallecalificaciones.xml',
+        'views/detallecalificacionesprocesos.xml',
+        #'views/combinado_evaluacion.xml',
+        #'views/pusuarios_cargo.xml',
+        #'views/usuariosacargo.xml',
+        'views/configuracion.xml',
+        'views/evaluacionjefeha.xml',
+        'views/ev_test.xml',
+        'views/pr_test.xml',
+        'views/evaluacionprocesoha.xml',
+        'views/userdefaultsections.xml',
+        'views/auxiliaractividadescambiantes.xml',
         'views/fecha_corte.xml',
+        'views/actividadesagregadasporelusuario.xml',
+        #'views/evaluacion_dos_procs.xml',
         'views/menu_principal.xml',
+        'data/defaultdata.xml',
+        #'data/scheduler_data.xml',
 
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
+        #'demo/demo.xml',
     ],
+    'css': ['/static/src/css/my_css.css'],
 }

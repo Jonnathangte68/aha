@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+<!--
+    <record id="actividades_agregadas_por_el_usuario_access" model="ir.rule">
+        <field name="name">Actividades agregadas por el usuario para sus usuarios correspondientes</field>
+        <field name="model_id" ref="model_aha_actividadesagregadasporelusuario" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[('usuario_id','=',user.id)]</field>
+    </record>
+  -->
+
+    <record model="ir.actions.act_window" id="aha.action_actividades_agregadas_por_el_usuario">
+      <field name="name">Hoja de Actividad</field>
+      <field name="res_model">aha.actividadesagregadasporelusuario</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+      <field name="domain">[('resuser_id','=',uid)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="aha.actividades_agregadas_por_el_usuario_lista">
+      <field name="name">Lista de actividades agregadas por el usuario</field>
+      <field name="model">aha.actividadesagregadasporelusuario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="lun"/>
+          <field name="mar"/>
+          <field name="miercol"/> 
+          <field name="juev"/> 
+          <field name="viern"/>
+          <field name="sabad"/>
+          <field name="name"/> 
+          <field name="um"/> 
+          <field name="frecuencia"/>  
+          <field name="auxfrecuencia"/>
+          <button name="eliminar_actividad" string="Eliminar" class="btn btn-primary" type="object"/>
+        </tree>
+      </field>
+    </record> 
+
+  </data>
+</odoo>

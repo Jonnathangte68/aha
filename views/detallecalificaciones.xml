@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+	<record model="ir.ui.view" id="formulario_detll_jefe">
+      <field name="name">Detalle de calificaciones del Usuario</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <form string="Agregar Actividades">
+   		    <sheet>
+	            <group col="2">
+	        		<group>
+	        			<field name="name"/>
+	        			<field name="calificacion_j"/>
+	        		</group>
+	        		<group>
+	        			<field name="calificacion_p"/>
+	        		</group>
+	            </group>
+   		    </sheet>
+        </form>
+      </field>
+    </record>
+    
+  </data>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    <record model="ir.actions.act_window" id="action_add_actividades_basicas">
+      <field name="name">Asignar fechas de corte por Departamento</field>
+      <field name="res_model">aha.actividades</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_actividades_basicas">
+      <field name="name"></field>
+      <field name="model">aha.area</field>
+      <field name="arch" type="xml">
+        <tree editable="top">
+          <field name="name"/>
+          <field name="fecha_corte"/>
+        </tree>
+      </field>
+    </record>
+
+    
+
+    </data>
+</openerp>

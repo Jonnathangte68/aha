@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!-- Usuarios para Jefes -->
+    <record model="ir.ui.view" id="listado_uno">
+      <field name="name">listado.uno</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <tree create="0" edit="0" delete="0">
+          <field name="name"/>
+          <field name="login"/>
+          <field name="password"/>
+          <field name="area_id"/>
+          <button name="calcular_calificacion" string="Calcular calificacion" type="object" context="{'u':login}"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Usuarios para Procesos -->
+    <!--
+    <record model="ir.ui.view" id="listado_dos">
+      <field name="name">listado.dos</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+        <tree create="0" edit="0" delete="0">
+            <field name="name"/>
+            <field name="login"/>
+            <field name="password"/>
+            <field name="rol_id"/>
+            <field name="area_id"/>
+            <button name="calcular_calificacion_p" string="Calcular calificacion" type="object" context="{'u':login}"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <record model="ir.ui.view" id="usuariosacargo_search">
+      <field name="name">Calcular Calificacion</field>
+      <field name="model">aha.usuario</field>
+      <field name="arch" type="xml">
+          <search string="Buscar calificacion de usuario">
+              <field name="name" filter_domain="[('name','ilike',self)]"/>
+              <field name="login" filter_domain="[('login','ilike',self)]"/>
+              <field name="password" filter_domain="[('password','ilike',self)]"/>
+              <field name="rol_id" filter_domain="[('rol_id.name','ilike',self)]"/>
+              <field name="area_id" filter_domain="[('area_id.name','ilike',self)]"/>
+          </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.server" id="action_tres">
+      <field name="name">mostrar listado de usuarios</field>
+      <field name="res_model">aha.usuario</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="listado_uno"/>
+      <field name="domain">[
+      ('jefe_id', '=', uid)
+      ]</field>
+    </record>
+
+    </data>
+</odoo>

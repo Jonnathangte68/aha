@@ -3,36 +3,118 @@
   <data>
 
     <record model="ir.actions.act_window" id="action_llenar_hoja">
-      <field name="name">form hoja</field>
-      <field name="res_model">ha</field>
+      <field name="name">Hoja de Actividad</field>
+      <field name="res_model">aha.ha</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
     </record>
 
     <record model="ir.ui.view" id="formulario_ha">
       <field name="name">Agregar Actividades</field>
-      <field name="model">ha</field>
+      <field name="model">aha.ha</field>
       <field name="arch" type="xml">
-        <form string="Agregar Actividades">
-        	<header>
-        		<button string="Imprimir Hoja" type="object" name="print_ha" class="oe_highlight"/>
-        	</header>
+        <form string="Agregar Actividades" create="false" edit="false">
+          <header>
+            <button string="Imprimir Hoja" type="object" name="print_ha" class="oe_highlight"/>
+            <label for="my_button" class="btn btn-sm btn-primary"/>
+          </header>
             <group>
-            	<group col="2">
-            		<group>
-            			<field name="name"/>
-            			<field name="mes"/>           			
-            		</group>
-            		<group>
-            			<field name="inicio_semana"/>
-		          		<field name="fin_semana"/> 
-            		</group>
-            	</group>
-                <field name="seccion_ids"/>
+              <group col="2">
+                <group>
+                  <field name="semana"/>
+                  <field name="usuario_id"/> 
+                  <field name="my_button" invisible="1"/> 
+                </group>
+                <group>
+                  <field name="inicio_semana"/>
+                  <field name="fin_semana"/>
+                  <!--<field name="entro_nuevo" invisible="1"/>--> 
+                  <field name="contador" invisible="1"/> 
+                </group>
+              </group>
             </group>
+            <p style="text-decoration:underline;font-weight: bold;padding-bottom: 0px !important;margin-bottom: 0px !important;font-size: 1.3em;color: red;">Bloquear Dias</p>
+            <group col="6">
+              <group>
+                <field name="lunes_b"/>
+              </group>
+              <group>
+                <field name="martes_b"/>
+              </group>
+              <group>
+                <field name="miercoles_b"/>
+              </group>
+              <group>
+                <field name="jueves_b"/>
+              </group>
+              <group>
+                <field name="viernes_b"/>
+              </group>
+              <group>
+                <field name="sabado_b"/>
+              </group>
+            </group>
+            <field name="seccion_ids" context="{'form_view_ref' : 'aha.formulario_registro_seccion'}"/>
         </form>
       </field>
-    </record>    
+    </record>   
+
+    <record model="ir.ui.view" id="formulario_registro_seccion">
+      <field name="name">Registrar Seccion</field>
+      <field name="model">aha.section</field>
+      <field name="arch" type="xml">
+        <form string="Registrar Seccion">
+            <field name="name"/>
+            <!--<field>
+                <tree string='description'>
+                  <field name='field_name'/>
+                </tree>
+            </field>-->
+            <!--<field name="activity_ids" context="{'form_view_ref' : 'aha.formulario_registro_de_actividad_dentro_llenado_ha'}">
+            </field>-->
+            <field name="activity_ids" context="{'form_view_ref' : 'aha.formulario_registro_de_actividad_dentro_llenado_ha'}">
+              <tree>
+                  <field name="secuencia"/>
+                  <field name="name"/> 
+                  <field name="um"/> 
+                  <field name="frecuencia"/> 
+                  <field name="lun"/>
+                  <field name="mar"/>
+                  <field name="miercol"/> 
+                  <field name="juev"/> 
+                  <field name="viern"/>
+                  <field name="sabad"/>   
+              </tree>
+            </field>
+        </form>
+      </field>
+    </record> 
+
+    <record model="ir.ui.view" id="formulario_registro_de_actividad_dentro_llenado_ha">
+      <field name="name">Registrar Actividad</field>
+      <field name="model">aha.activity</field>
+      <field name="arch" type="xml">
+        <form string="Registrar Actividad">
+          <group col="2">
+            <group>
+              <field name="lun"/>
+              <field name="mar"/>
+              <field name="miercol"/> 
+              <field name="juev"/> 
+              <field name="viern"/>
+              <field name="sabad"/>               
+            </group>
+            <group>
+              <field name="name"/> 
+              <field name="um"/> 
+              <field name="frecuencia"/>  
+              <field name="auxfrecuencia" attrs="{'invisible': [('|'),('frecuencia', '=', 'evento'),'|',('frecuencia', '=', 'usm'),'|',('frecuencia', '=', 'ssm'),'|',('frecuencia', '=', 'tsm'),'|',('frecuencia', '=', 'csm')]}"/>
+              <field name="secuencia"/>
+            </group>
+          </group>
+        </form>
+      </field>
+    </record> 
 
   </data>
 </odoo>

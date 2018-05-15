@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record model="ir.actions.act_window" id="action_seis">
+      <field name="name">action.seis</field>
+      <field name="res_model">aha.usuario</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      
+    </record>
+
+    </data>
+</odoo>

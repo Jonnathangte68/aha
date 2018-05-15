@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.actions.act_window" id="action_jefe_asigna_secciones">
+      <field name="name">Hojas de actividad del Personal</field>
+      <field name="res_model">aha.ha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record model="ir.ui.view" id="formulario_asignacion_secciones_jefe">
+      <field name="name">Empleados a cargo</field>
+      <field name="model">aha.ha</field>
+      <field name="arch" type="xml">
+        <tree string="Secciones a asignar" create="1" delete="0" edit="0">
+            <field name="name"/>
+            <field name="inicio_semana"/>
+            <field name="fin_semana"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</odoo>
