@@ -99,8 +99,8 @@ class actividadesagregadasporelusuario(models.Model):
         #print('Acaaaaaaaaaaaaaaaaaaaaaaaaa test')
         #print(self.name)
         #print(values)
-        self.env['aha.actividadesagregadasporelusuario'].search([('name','=',self.name),('resuser_id','=',self.env.user.id)]).sudo().unlink()
-        self.env['aha.activity'].search([('name','=',self.name),('um','=',self.um)]).sudo().unlink()
+        #self.env['aha.actividadesagregadasporelusuario'].search([('name','=',self.name),('resuser_id','=',self.env.user.id)]).sudo().unlink()
+        #self.env['aha.activity'].search([('name','=',self.name),('um','=',self.um)]).sudo().unlink()
         return creado
 
     @api.model

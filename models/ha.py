@@ -149,7 +149,53 @@ class ha(models.Model):
                     })
         return creado
         """
+        try:
+            asigjefe_cr = self.env.cr
+            asigjefe_cr.execute("SELECT jefe_uid FROM aha_usuario WHERE resuser_id = "+str(self.env.user.id))
+            id_del_jefe = asigjefe_cr.fetchone()
+            print("Aqui este es el ID del jefe")
+            print(id_del_jefe[0])
+            values['hausuario_id'] = id_del_jefe[0]
+        except Exception as e:
+            print(e)
+        print("Lo que lleva la Ha")
+        print(values)
+        print("Buscar ID de usuario")
+        csor = self.env.cr
+        csor.execute("SELECT id FROM aha_usuario WHERE resuser_id = "+str(self.env.user.id))
+        id_buscado = csor.fetchone()
+        print("El id buscado es    " + str(id_buscado[0]))
+        values['usuario_id'] = id_buscado[0]
         creado = super(ha, self).create(values)
+        arrayactividadesagregar = []
+        for seccions in creado.seccion_ids:
+            for activids in seccions.activity_ids:
+                print("La actividad   " + str(activids.typo))
+                if activids.typo == 0 or activids.typo == False:
+                    print("Entra al agregar una activ propia")
+                    print("La actividad  Detallesssss      typo   " + str(activids.typo) + " Nombre de actividad   " + str(activids.name)  + " seccion " + activids.section_id.name)
+                    # Via sql
+                    print(self.env.user.id)
+                    if not self.exist_in_my_own_activities(activids.name,activids.frecuencia,activids.um):
+                        self.env['aha.actividadesagregadasporelusuario'].create({
+                            'name':activids.name,
+                            'um':activids.um,
+                            'frecuencia':activids.frecuencia,
+                            'lun':activids.lun,
+                            'mar':activids.mar,
+                            'miercol':activids.miercol,
+                            'juev':activids.juev,
+                            'viern':activids.viern,
+                            'sabad':activids.sabad,
+                            'section_id':activids.section_id,
+                            'section_name':seccions.name,
+                            'typo':activids.typo,
+                            'actividad_id':activids.name,
+                            'usuario_id':creado.usuario_id,
+                            'resuser_id':self.env.user.id,
+                            'ha_id':creado.name,
+                            'secuencia':activids.secuencia
+                        })
         return creado
 
     @api.multi
@@ -271,8 +317,29 @@ class ha(models.Model):
         #print(hastael)
         #print('------------------------ FIN SEMANA --------------------------------------')
         #print(self.fin_semana)
-        desdeel = 14
-        hastael = 19
+
+        current222_tz2='UTC'
+        target222_tz2='America/Tijuana'
+        current222_tz2 = pytz.timezone(current222_tz2)
+        target222_tz2 = pytz.timezone(target222_tz2)
+        target222_dt2_primera_fecha = current222_tz2.localize(datetime.datetime.strptime(self.inicio_semana, "%Y-%m-%d %H:%M:%S")).astimezone(target222_tz2)
+        target222_dt2 = current222_tz2.localize(datetime.datetime.strptime(self.fin_semana, "%Y-%m-%d %H:%M:%S")).astimezone(target222_tz2)
+        stringDate2222 = target222_dt2.strftime("%Y-%m-%d %H:%M:%S")
+        stringDate1111 = target222_dt2_primera_fecha.strftime("%Y-%m-%d %H:%M:%S")
+
+        print("inicio semana " + stringDate1111)
+        print("Cortado " + stringDate1111[8:10])
+        print("fin semana " + stringDate2222)
+        print("Cortado " + stringDate2222[8:10])
+
+
+        desdeel = int(stringDate1111[8:10])
+        hastael = int(stringDate2222[8:10])
+        mes_entero_remplaz = stringDate1111[5:7]
+        #mes_entero_remplaz = int(stringDate1111[5:7])
+        mes_entero_remplaz2 = stringDate2222[5:7]
+        #mes_entero_remplaz = int(stringDate2222[5:7])
+        print("Aqui mesesssssssssssssssssssssssssssssssss")
 
 
         #usuario_id = "".join(html_escape_table.get(c,c) for c in resultado_usuario[0])
@@ -310,8 +377,8 @@ class ha(models.Model):
         else:
             area_id = 'NA'
 
-        mes_uno = str(self.inicio_semana[5:7])
-        mes_dos = str(self.fin_semana[5:7])
+        mes_uno = mes_entero_remplaz
+        mes_dos = mes_entero_remplaz2
 
         if mes_uno == '01':
             mes_uno = 'Ene'
@@ -362,12 +429,6 @@ class ha(models.Model):
             mes_dos = 'Nov'
         else:
             mes_uno = 'Dic'
-
-
-
-
-        # Quitar
-        mes_uno = 'May'
 
 
 
@@ -556,7 +617,7 @@ class ha(models.Model):
     #_constraints = [(check_existance,'Su Ha ya se encuentra registrada, saludos!', ['inicio_semana','fin_semana','usuario_id'])]
 
     def _set_default_sections(self):
-        print('SET DEFAULT SECTIONSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
+        #print('SET DEFAULT SECTIONSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
 
 
         # Primero lo primera borrar las actividades anteriores
@@ -565,8 +626,8 @@ class ha(models.Model):
         cursor_loco.execute("DELETE FROM AHA_ACTIVITY WHERE create_uid = "+str(self.env.user.id))
 
 
-        cursor_noqueremosveanrepetidas = self.env.cr
-        cursor_noqueremosveanrepetidas.execute("DELETE FROM AHA_ACTIVIDADESAGREGADASPORELUSUARIO WHERE id IN (SELECT id FROM (SELECT id,ROW_NUMBER() OVER( PARTITION BY name ORDER BY  id DESC) AS row_num FROM AHA_ACTIVIDADESAGREGADASPORELUSUARIO ) t WHERE t.row_num > 1 AND create_uid = "+str(self.env.user.id)+")")
+        #cursor_noqueremosveanrepetidas = self.env.cr
+        #cursor_noqueremosveanrepetidas.execute("DELETE FROM AHA_ACTIVIDADESAGREGADASPORELUSUARIO WHERE id IN (SELECT id FROM (SELECT id,ROW_NUMBER() OVER( PARTITION BY name ORDER BY  id DESC) AS row_num FROM AHA_ACTIVIDADESAGREGADASPORELUSUARIO ) t WHERE t.row_num > 1 AND create_uid = "+str(self.env.user.id)+")")
 
         # Ahora si todo el desmadre
 
@@ -587,23 +648,24 @@ class ha(models.Model):
                                 if len(sec.activity_ids) > 0:  
                                     for atv in sec.activity_ids:  
                                         #print(" Valores que dan error : --> name"+ str(atv.name) + "aux frecuencia" +str(atv.auxfrecuencia))                               
-                                        activity = self.env['aha.activity'].sudo().create({
-                                            'name':atv.name,
-                                            'um':atv.um,
-                                            'frecuencia':atv.frecuencia,
-                                            'secuencia':atv.secuencia,
-                                            'lun':atv.lun,
-                                            'mar':atv.mar,
-                                            'miercol':atv.miercol,
-                                            'juev':atv.juev,
-                                            'viern':atv.viern,
-                                            'sabad':atv.sabad,
-                                            'section_id':seccion.id,
-                                            'typo':atv.typo,
-                                            'cambio':atv.cambio,
-                                            'aaa':atv.aaa,
-                                            'auxfrecuencia':atv.auxfrecuencia
-                                        })
+                                        if atv.typo:    
+                                            activity = self.env['aha.activity'].sudo().create({
+                                                'name':atv.name,
+                                                'um':atv.um,
+                                                'frecuencia':atv.frecuencia,
+                                                'secuencia':atv.secuencia,
+                                                'lun':atv.lun,
+                                                'mar':atv.mar,
+                                                'miercol':atv.miercol,
+                                                'juev':atv.juev,
+                                                'viern':atv.viern,
+                                                'sabad':atv.sabad,
+                                                'section_id':seccion.id,
+                                                'typo':atv.typo,
+                                                'cambio':atv.cambio,
+                                                'aaa':atv.aaa,
+                                                'auxfrecuencia':atv.auxfrecuencia
+                                            })
                                 auxactividadesagregadas = []
                                 actpropiass = self.env['aha.actividadesagregadasporelusuario'].search([('usuario_id','=',usuario.id)])
                                 #print(actpropiass)
@@ -656,6 +718,7 @@ class ha(models.Model):
                         current_tz = pytz.timezone(current_tz)
                         target_tz = pytz.timezone(target_tz)
                         dia_entero = current_tz.localize(datetime.datetime.strptime(i.area_id.fecha_corte, "%Y-%m-%d %H:%M:%S")).astimezone(target_tz).isoweekday()
+                        print("En get fecha corte    ---- >   el dia "+i.area_id.fecha_corte)
                         #print('Datetime correcto!')
                         #print(dia_entero)
                         if dia_entero == 1:
@@ -731,6 +794,16 @@ class ha(models.Model):
             'url': 'http://www.google.com/',
             'target': 'self',
         }
+    
+    # Si existe una actividad propias con el mismo nombre, la misma frecuencia y la misma unidad de medida retorna FALSE caso contrario retorna TRUE
+    def exist_in_my_own_activities(self,activity_name, activity_frecuencia, activity_um):
+        try:
+            for avpropia in self.env['aha.actividadesagregadasporelusuario'].search([('resuser_id','=',self.env.user.id)]):
+                if avpropia.name == activity_name and avpropia.frecuencia == activity_frecuencia and avpropia.um == activity_um:
+                    return True
+            return False
+        except Exception as e:
+            return False
 
     @api.multi
     @api.onchange('lunes_b')

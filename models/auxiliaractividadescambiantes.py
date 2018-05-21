@@ -45,6 +45,11 @@ class auxiliaractividadescambiantes(models.Model):
 
     @api.one
     def autorizar(self):
+        micursor = self.env.cr
+        micursor.execute("UPDATE aha_activity SET name = '"+self.actividadnueva+"' WHERE id = "+str(self.actividad_id))
+        #id_del_usuario = micursor.fetchone()
+        #print(id_del_usuario[0])
+        # usuario -> rol -> tipoha -> secciones -> actividades
         #activ = self.env['aha.activity'].search([('name','=',self.name)])
         #for ac in activ:
             #ac.write({'name':self.actividadnueva,'cambio':0,'aaa':None},1)
@@ -62,6 +67,7 @@ class auxiliaractividadescambiantes(models.Model):
         #self.env.cr.execute("UPDATE aha_activity SET name = '"+self.actividadnueva+"' WHERE name = '"+self.actividadanterior+"'")
         #self.unlink()
         #raise Exception("El usuario indicado  "+str(self.usuario_cambiante))
+        """
         cursor_nuevo = self.env.cr
         cursor_nuevo.execute("SELECT rol_id FROM aha_usuario WHERE login = '"+self.usuario_cambiante+"' limit 1")
         uid = cursor_nuevo.fetchone()
@@ -71,6 +77,7 @@ class auxiliaractividadescambiantes(models.Model):
                 for acname in sec.activity_ids:
                     if acname.name == self.actividadanterior:
                         self.env.cr.execute("UPDATE aha_activity SET name = '"+self.actividadnueva+"' WHERE id = "+str(acname.id))
+        """
         #usuario_id = result.fetchone()
         # Con el rol recorrer el tipo de ha de ese rol y recorrer las secciones de esos tipos de HA y recorrer las actividades de esas secciones y si la actividad tiene el mismo nombre modificarla con sql
         #raise Exception("El usuario indicado  "+str(usuario_id))

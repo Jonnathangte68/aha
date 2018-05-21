@@ -221,6 +221,7 @@ class usuario(models.Model):
                     if i == 0:
                         condicion_or += ("ha_id = "+str(ha.id))
                         i+=1
+                        sin_ha = True
                     else:
                         condicion_or += (" or ha_id = "+str(ha.id))
                         i+=1
@@ -276,6 +277,7 @@ class usuario(models.Model):
                     if i == 0:
                         condicion_or += ("ha_id = "+str(ha.id))
                         i+=1
+                        sin_ha = True
                     else:
                         condicion_or += (" or ha_id = "+str(ha.id))
                         i+=1
