@@ -105,7 +105,7 @@ class actividadesagregadasporelusuario(models.Model):
 
     @api.model
     def write(self, values):
-        print(values)
+        #print(values)
         res = super(actividadesagregadasporelusuario, self).write(values) #res stores the result of the write function
         #self.env['aha.activity'].search([('name','=',self.name),('create_uid','=',self.env.user.id)]).sudo().unlink()
         #self.env['aha.actividadesagregadasporelusuario'].search([('name','=',self.name),('create_uid','=',self.env.user.id)]).sudo().unlink()
@@ -113,7 +113,7 @@ class actividadesagregadasporelusuario(models.Model):
 
     @api.one
     def eliminar_actividad(self):
-        print('Eliminar Actividad')
+        #print('Eliminar Actividad')
         #env['res.partner'].sudo(public).search([])
         #admin = env.ref('base.public_user')
         #actividadeliminar = self.env['aha.activity'].search([('name','=',self.name)])

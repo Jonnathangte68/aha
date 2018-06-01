@@ -153,29 +153,30 @@ class ha(models.Model):
             asigjefe_cr = self.env.cr
             asigjefe_cr.execute("SELECT jefe_uid FROM aha_usuario WHERE resuser_id = "+str(self.env.user.id))
             id_del_jefe = asigjefe_cr.fetchone()
-            print("Aqui este es el ID del jefe")
-            print(id_del_jefe[0])
+            #print("Aqui este es el ID del jefe")
+            #print(id_del_jefe[0])
             values['hausuario_id'] = id_del_jefe[0]
         except Exception as e:
-            print(e)
-        print("Lo que lleva la Ha")
-        print(values)
-        print("Buscar ID de usuario")
+            raise e
+            #print(e)
+        #print("Lo que lleva la Ha")
+        #print(values)
+        #print("Buscar ID de usuario")
         csor = self.env.cr
         csor.execute("SELECT id FROM aha_usuario WHERE resuser_id = "+str(self.env.user.id))
         id_buscado = csor.fetchone()
-        print("El id buscado es    " + str(id_buscado[0]))
+        #print("El id buscado es    " + str(id_buscado[0]))
         values['usuario_id'] = id_buscado[0]
         creado = super(ha, self).create(values)
         arrayactividadesagregar = []
         for seccions in creado.seccion_ids:
             for activids in seccions.activity_ids:
-                print("La actividad   " + str(activids.typo))
+                #print("La actividad   " + str(activids.typo))
                 if activids.typo == 0 or activids.typo == False:
-                    print("Entra al agregar una activ propia")
-                    print("La actividad  Detallesssss      typo   " + str(activids.typo) + " Nombre de actividad   " + str(activids.name)  + " seccion " + activids.section_id.name)
+                    #print("Entra al agregar una activ propia")
+                    #print("La actividad  Detallesssss      typo   " + str(activids.typo) + " Nombre de actividad   " + str(activids.name)  + " seccion " + activids.section_id.name)
                     # Via sql
-                    print(self.env.user.id)
+                    #print(self.env.user.id)
                     if not self.exist_in_my_own_activities(activids.name,activids.frecuencia,activids.um):
                         self.env['aha.actividadesagregadasporelusuario'].create({
                             'name':activids.name,
@@ -327,10 +328,10 @@ class ha(models.Model):
         stringDate2222 = target222_dt2.strftime("%Y-%m-%d %H:%M:%S")
         stringDate1111 = target222_dt2_primera_fecha.strftime("%Y-%m-%d %H:%M:%S")
 
-        print("inicio semana " + stringDate1111)
-        print("Cortado " + stringDate1111[8:10])
-        print("fin semana " + stringDate2222)
-        print("Cortado " + stringDate2222[8:10])
+        #print("inicio semana " + stringDate1111)
+        #print("Cortado " + stringDate1111[8:10])
+        #print("fin semana " + stringDate2222)
+        #print("Cortado " + stringDate2222[8:10])
 
 
         desdeel = int(stringDate1111[8:10])
@@ -339,7 +340,7 @@ class ha(models.Model):
         #mes_entero_remplaz = int(stringDate1111[5:7])
         mes_entero_remplaz2 = stringDate2222[5:7]
         #mes_entero_remplaz = int(stringDate2222[5:7])
-        print("Aqui mesesssssssssssssssssssssssssssssssss")
+        #print("Aqui mesesssssssssssssssssssssssssssssssss")
 
 
         #usuario_id = "".join(html_escape_table.get(c,c) for c in resultado_usuario[0])
@@ -712,13 +713,18 @@ class ha(models.Model):
                 for a in jj:
                     if a.id == i.area_id.id:
                         dia = ""
+                        cursor_mine_mine = self.env.cr
+                        cursor_mine_mine.execute("select fecha_corte from aha_aux_estados_auxiliares where area_id = "+str(a.id)+" and activo = 'a'")
+                        mifetchdate = cursor_mine_mine.fetchone()
+                        #print("Aqui mi fetch dateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+                        #print(mifetchdate[0])
                         #dia_entero = datetime.datetime.strptime(i.area_id.fecha_corte, "%Y-%m-%d %H:%M:%S")#.isoweekday()
                         current_tz='UTC'
                         target_tz='America/Tijuana'
                         current_tz = pytz.timezone(current_tz)
                         target_tz = pytz.timezone(target_tz)
-                        dia_entero = current_tz.localize(datetime.datetime.strptime(i.area_id.fecha_corte, "%Y-%m-%d %H:%M:%S")).astimezone(target_tz).isoweekday()
-                        print("En get fecha corte    ---- >   el dia "+i.area_id.fecha_corte)
+                        dia_entero = current_tz.localize(datetime.datetime.strptime(mifetchdate[0], "%Y-%m-%d %H:%M:%S.%f")).astimezone(target_tz).isoweekday()
+                        #print("En get fecha corte    ---- >   el dia "+str(i.area_id.fecha_corte))
                         #print('Datetime correcto!')
                         #print(dia_entero)
                         if dia_entero == 1:

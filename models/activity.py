@@ -82,38 +82,27 @@ class activity(models.Model):
         #print(values)
 
         creado = super(activity, self).create(values)
-        print("Actividad creadaaaa nueva")
-        print(creado)
+        #print("Actividad creadaaaa nueva")
+        #print(creado)
         return creado
 
     @api.model
     #on edit
     def write(self, values,cambio=None):
 
-        print("Llamado WRITE")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print("Llamado WRITE461531351381351")
-        print(values)
+        
         miactivanteriornbr = self.name
 
         if not self.typo or self.typo == 0:
             #La actividad no se agrega a la seccion -1
             #Es una actividad propia, sin tanto protocolo. No interesa cambio y no interesa nada mas, modificar SQL.
             crs_actividadespropias = self.env.cr
-            print("Consulta sql")
-            print("SELECT * FROM aha_actividadesagregadasporelusuario WHERE name = '"+self.name+"' AND um = '"+self.um+"' AND frecuencia = '"+self.frecuencia+"'")
-            crs_actividadespropias.execute("SELECT * FROM aha_actividadesagregadasporelusuario WHERE name = '"+self.name+"' AND um = '"+self.um+"' AND frecuencia = '"+self.frecuencia+"'")
+            #print("Consulta sql")
+            #print("SELECT * FROM aha_actividadesagregadasporelusuario WHERE name = '"+str(self.name)+"' AND um = '"+str(self.um)+"' AND frecuencia = '"+str(self.frecuencia)+"'")
+            crs_actividadespropias.execute("SELECT * FROM aha_actividadesagregadasporelusuario WHERE name = '"+str(self.name)+"' AND um = '"+str(self.um)+"' AND frecuencia = '"+str(self.frecuencia)+"'")
             r = crs_actividadespropias.fetchall()
             for item in r:
-                print("Entra tiene valores")
+                #print("Entra tiene valores")
                 bandera = 0
                 cursor_internooo = self.env.cr
                 #Formar SQL
@@ -220,20 +209,20 @@ class activity(models.Model):
                 #print(sql_yy)
                 cursor_internooo.execute(sql_yy)
 
-        print("Id actividad creada")
-        print(self.id)
+        #print("Id actividad creada")
+        #print(self.id)
 
         if self.typo == 1:
             crs_selusuarioproceso = self.env.cr
-            crs_selusuarioproceso.execute("SELECT id FROM aha_usuario WHERE login = 'proceso'")
+            crs_selusuarioproceso.execute("SELECT id FROM res_users WHERE login = 'proceso'")
             tmpselusuproceso = crs_selusuarioproceso.fetchone()
             id_usuario_procesos = tmpselusuproceso[0]
             crs_actividadespropias = self.env.cr
             crs_actividadespropias.execute("SELECT * FROM aha_activity WHERE name = '"+self.name+"' AND um = '"+self.um+"' AND frecuencia = '"+self.frecuencia+"' AND create_uid = "+str(id_usuario_procesos))
             rsp = crs_actividadespropias.fetchall()
-            print("La actividad de la seccion BASEEEEEEEEEEEEEEEE que se quiere cambiar")
+            #print("La actividad de la seccion BASEEEEEEEEEEEEEEEE que se quiere cambiar")
             #print("SELECT * FROM aha_actividadesagregadasporelusuario WHERE name = '"+self.name+"' AND um = '"+self.um+"' AND frecuencia = '"+self.frecuencia+"' AND create_uid = "+str(id_usuario_procesos))
-            print(rsp)
+            #print(rsp)
             for actchanged in rsp:
                 bandera = 0
                 id_actividadacambiar = actchanged[0]
@@ -241,10 +230,11 @@ class activity(models.Model):
                 sql_yy2 = "UPDATE aha_activity "
                 if values['name']:
                     #Abrir consulta para crear traer el id de mi usuario y el res id del jefe
-                    cursor_de_usuario = self.env.cr
-                    cursor_de_usuario.execute("SELECT name, jefe_uid FROM AHA_USUARIO WHERE resuser_id = " + str(self.env.user.id))
-                    valores_de_usuario = cursor_de_usuario.fetchone()
-                    self.env['aha.auxiliaractividadescambiantes'].create({'name':self.name, 'actividadanterior':self.name, 'actividadnueva':values['name'],'actividad_id':id_actividadacambiar,'jefe_res_uid':valores_de_usuario[1],'usuario_cambiante':valores_de_usuario[0]})
+                    if self.name!=values['name']:
+                        cursor_de_usuario = self.env.cr
+                        cursor_de_usuario.execute("SELECT name, jefe_uid FROM AHA_USUARIO WHERE resuser_id = " + str(self.env.user.id))
+                        valores_de_usuario = cursor_de_usuario.fetchone()
+                        self.env['aha.auxiliaractividadescambiantes'].create({'name':self.name, 'actividadanterior':self.name, 'actividadnueva':values['name'],'actividad_id':id_actividadacambiar,'jefe_res_uid':valores_de_usuario[1],'usuario_cambiante':valores_de_usuario[0]})
                 if values['secuencia']:
                     bandera = bandera + 1
                     if bandera == 1:

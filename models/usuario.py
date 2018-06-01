@@ -60,11 +60,11 @@ class usuario(models.Model):
 
     def calcular_calificacion(self):
 
-        print('SIIIIIIIIIIIIIIIIIIIIIIIIII ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+        #print('SIIIIIIIIIIIIIIIIIIIIIIIIII ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
 
         l = self.env.context.get('u')
 
-        print(l)
+        #print(l)
 
         calificacion_calculada2 = ""
         calificacion_calculada = "NO CALCULADA"

@@ -4,7 +4,7 @@
 
 
 
-    <menuitem name="Ha-s" id="aha.menu_root"/>
+    <menuitem name="Ha-s" id="aha.menu_root" web_icon="aha,static/description/icon.png"/>
 
    
     <!-- Opciones para el Rol de Jefe -->
